@@ -19,13 +19,13 @@ const auth=new google.auth.GoogleAuth({
 });
 
 
-const range = 'Sheet1!A:B';
+const range = 'Sheet1!A:B';  //depending upon the no of column
 const sheetName='Sheet1';
-const numRowsToSkip=3;
 
 
-const values = [
-  ['Aman','34'],
+
+const values = [[],[],
+  ['Chaman','34'],    // values can be inserted here from database
   ['Sumit', '42'],
 ];
 
@@ -35,7 +35,6 @@ app.get('/',async (req,res)=>{
       const client=await auth.getClient();
       const googleSheets = google.sheets({ version: "v4", auth: client });
 
-  
       //get meta data from google sheet
       const metaData = await googleSheets.spreadsheets.get({
         auth,
@@ -63,6 +62,9 @@ app.get('/',async (req,res)=>{
      res.send(getRows.data);
 
 });
+
+
+
 
 
 app.listen(PORT,()=>{
